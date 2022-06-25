@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block title %}
+  details-{{hotel.name}}
+{% endblock title %}    
+
+{% block content %}
+<style>
+    .detail-body {
+        background: rgba(0, 0, 0, 0.388);
+    }
+    .main-body{
+        background: rgb(2,0,36);
+        background: linear-gradient(90deg, rgba(171,200,199,1) 0%, rgba(11,197,161,1) 35%, rgba(119,197,166,1) 100%);
+    }
+    .btn{
+        background: linear-gradient(90deg, rgb(116, 121, 121) 35%, rgb(90, 166, 166) 100%);
+
+    }
+</style>
+
+  <div class="container col-md-12 my-4 py-3 detail-body ">
+    <div class="card main-body">
+        <div class="card-header">
+          {{ hotel.location}} | {{hotel.name}}
+        </div>
+    <div>
+        <a href="/" class="btn btn-sm btn-success ms-4 my-3 border border-dark" >Home</a>
+    </div>
+
+        <div class="col-md-3 mx-auto  my-4">
+            <img class=" ms-4 border border-3 rounded-2 border-dark" src="{{ hotel.hotel_img.first.image.url}} " style="width: 600px ; height: 300px ;" alt="Card image cap">
+        </div>
+
+       
+
+        <div class="card-body mx-auto">
+          <h4 class="card-title text-center">{{hotel.name}}</h4>
+          <p class="card-text text-dark"> <b> {{hotel.description}} </b></p>
+          <h5 class="card-title">Price - <b> {{hotel.price}} Rs /- per Day.</b></h5>
+
+          <div class="btn-group my-2" role="group" aria-label="Third group">
+           <u>
+           <b>
+            Amenities
+           </b>  
+           </u>
+            {% for amenity  in hotel.amenities.all  %}
+              
+            <button type="button" class=" btn-sm btn-outline-info btn-dark text-light mx-2 ">{{amenity}} </button>
+            {% endfor %}
+          </div>
+
+          
+        </div>
+
+        <div class="row mx-auto mt-4 pt-4">
+            <h5 class="text-dark "> <b><u>Hotel Images:</u></b></h5>
+            {% for imgs  in hotel.hotel_img.all  %}
+            <div class="col-md ">
+            <img class="mx-auto  border my-2 border-3 rounded-2 border-dark" style="height: 200px; width: 250px;" src="{{ imgs.image.url}} " alt="Card image cap">
+            </div>
+            {% endfor %}
+        </div>
+
+    </div><br>
+    &nbsp;
+</div>
+
+<div class="container">
+    <br> &nbsp; <br>
+
+</div>
+
+
+{% if request.user.is_authenticated %}
+  
+
+<div class="filter-card col-md-4 mx-auto my-4">
+    <h5></h5>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="row form-group">
+            <div class="col-md-12">
+                <label for="mintopay">Check in</label>
+                <p>
+                    <input type="date" name="checkin" id="checkin" class="form-control">
+                </p>
+            </div>
+            <div class="col-md-12">
+                <label for="maxtopay">Check out</label>
+                <p>
+                    <input type="date" name="checkout" id="checkout" class="form-control">
+                </p>
+                <button class="btn btn-sm btn-success"  type="submit">Book</button>
+            </div>
+        </div>
+
+        <!-- <div class="row form-group">
+            <div class="col-md-12">
+                <label for="date-start">Price Range</label>: £
+                <span id="price" class="price">1000</span>
+                <input type="range" min="23" max="1000" value="1000" class="slider"
+                    id="myRange">
+                </p>
+            </div>
+        </div> -->
+        <!-- <div class="row form-group">
+            <div class="col-md-12">
+                <input type="submit" class="btn btn-primary btn-block" value="Limit">
+            </div>
+        </div> -->
+    </form>
+</div>
+<div>
+    <span>&nbsp; <br></span>
+</div>
+{% endif %}
+
+{% endblock content %}

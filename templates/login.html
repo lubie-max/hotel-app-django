@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}
+  
+{% endblock title %}    
+
+{% block content %}
+
+<style>
+      html {
+    height: 100%;
+  }
+  body {
+    margin:0;
+    padding:0;
+    font-family: sans-serif;
+    background: linear-gradient(#141e30, #243b55);
+  }
+</style>
+<!-- <div class="container mt-5 pt-5 col-6">
+
+
+
+    <h1 class="text-dark ">Login Here</h1>
+    <div class="sm-6 mt-3">
+    <form method="post" action="">
+        <div class="mb-3 mt-2">
+          <label for="exampleInputEmail1" class="form-label">Username</label>
+          <input type="text" required name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" required name="password" class="form-control" id="exampleInputPassword1">
+        </div>
+       
+        <button type="submit" class="btn btn-dark">Submit</button>
+      </form>
+      <br>
+      <h2>If not registered? <a href="{% url 'register' %}" class="btn btn-dark btn-sm " > Register Here</a></h2>
+
+    </div>
+</div>
+   -->
+
+  <div class="container">
+    <div class="login-box">
+      <h2>Login Here</h2>
+      <form  method="post">
+        {% csrf_token %}
+        <div class="user-box">
+          <input type="text" name="username" required="">
+          <label>Username</label>
+        </div>
+        <div class="user-box">
+          <input type="password" name="password" required="">
+          <label>Password</label>
+        </div>
+        <!-- <a href="#" class="mb-3" type="submit"> -->
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+         <button class="text-light btn btn-dark  btn-sm border border-info" type="submit" > Submit</button> 
+        <!-- </a> -->
+      </form>
+      <br>
+      <h6 class="text-light my-4">If not registered? &nbsp; <a href="{% url 'register' %}" class="btn btn-dark btn-sm border border-info" > Register </a></h6>
+
+
+    </div>
+  </div>
+
+  
+{% endblock content %}
